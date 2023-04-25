@@ -9,7 +9,7 @@ import hello.core.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 
 @Component // 구현체 클래스에 사용
-@RequiredArgsConstructor // final이 붙은 필드로 생성자 생성
+// @RequiredArgsConstructor // final이 붙은 필드로 생성자 생성
 public class OrderServiceImpl implements OrderService {
 
     // @Autowired 필드 주입, 권장하지 않음, DI 프레임워크가 없으면 사용 불가
@@ -26,13 +26,12 @@ public class OrderServiceImpl implements OrderService {
     // this.discountPolicy = discountPolicy;
     // }
 
-    // @Autowired // 생성자에 사용 , 생성자가 딱 1개만 있으면 생략 가능
-    // public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy
-    // discountPolicy) {
-    // System.out.println("====================== 1. OrderServiceImpl");
-    // this.memberRepository = memberRepository;
-    // this.discountPolicy = discountPolicy;
-    // }
+    @Autowired // 생성자에 사용 , 생성자가 딱 1개만 있으면 생략 가능
+    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+        System.out.println("====================== 1. OrderServiceImpl");
+        this.memberRepository = memberRepository;
+        this.discountPolicy = discountPolicy;
+    }
 
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
